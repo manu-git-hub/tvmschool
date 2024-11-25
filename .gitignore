@@ -1,0 +1,28 @@
+# Node modules directory
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# dotenv environment variable files
+.env
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDEs or editor files
+.vscode/
+.idea/
+
+# Dependency directories
+bower_components/
+
+# Build directories
+dist/
+build/
+
+# Temporary files
+*.swp
