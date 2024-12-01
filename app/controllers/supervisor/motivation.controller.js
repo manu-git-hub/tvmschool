@@ -34,6 +34,13 @@ exports.motivation = async (req, res) => {
       data: newMotivations,
     });
   } catch (error) {
+    if (error.name === 'SequelizeForeignKeyConstraintError') {
+      // Handle foreign key constraint errors specifically
+      return res.status(400).send({
+        message: 'Teacher not found. Please provide a valid teacher ID.',
+      });
+    }
+
     res.status(500).send({ message: 'Error adding motivations.', error: error.message });
   }
 };

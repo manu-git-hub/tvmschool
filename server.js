@@ -28,12 +28,15 @@ const userRoutes = require("./app/routes/user.routes");
 const authRoutes = require("./app/routes/auth.routes");
 const scheduleTeacherRoutes = require("./app/routes/scheduleTeacher.routes");
 const motivationRoutes = require('./app/routes/supervisor/motivation.routes');
+const teachingAidRoutes = require('./app/routes/supervisor/teachingAid.routes');
 
 app.use('/api/test', testRoutes);
 app.use('/app', userRoutes);
 app.use('/app', authRoutes);
 app.use('/api/scheduleTeacher', scheduleTeacherRoutes);
 app.use('/api/motivation', motivationRoutes);
+app.use('/api/teachingAid', teachingAidRoutes);
+
 
 // Function to initialize data in the database
 async function initializeData() {
