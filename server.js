@@ -17,7 +17,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // For parsing application/x
 app.use(
   cookieSession({
     name: "session",
-    secret: process.env.COOKIE_SECRET, 
+    secret: process.env.COOKIE_SECRET,
     httpOnly: true,
   })
 );
@@ -26,17 +26,70 @@ app.use(
 const testRoutes = require('./app/routes/test.routes');  
 const userRoutes = require("./app/routes/user.routes");
 const authRoutes = require("./app/routes/auth.routes");
+const scheduleTeacherRoutes = require("./app/routes/scheduleTeacher.routes");
 
 app.use('/api/test', testRoutes);
 app.use('/app', userRoutes);
 app.use('/app', authRoutes);
+app.use('/api/scheduleTeacher', scheduleTeacherRoutes);
+
+// Function to initialize data in the database
+async function initializeData() {
+  try {
+    await db.standard.bulkCreate([
+      { name: 'Pre-KG' },
+      { name: 'LKG' },
+      { name: 'UKG' },
+      { name: 'I' },
+      { name: 'II' },
+      { name: 'III' },
+      { name: 'IV' },
+      { name: 'V' },
+      { name: 'VI' },
+      { name: 'VII' },
+      { name: 'VIII' },
+      { name: 'IX' },
+      { name: 'X' },
+      { name: 'XI' },
+      { name: 'XII' },
+    ]);
+
+    await db.subject.bulkCreate([
+      { name: 'Accountancy' },
+      { name: 'Botany' },
+      { name: 'Chemistry' },
+      { name: 'Commerce' },
+      { name: 'Computer Science' },
+      { name: 'English' },
+      { name: 'General Knowledge' },
+      { name: 'Hindi' },
+      { name: 'Mathematics' },
+      { name: 'Physics' },
+      { name: 'Science' },
+      { name: 'Social Science' },
+      { name: 'Tamil' },
+      { name: 'Zoology' },
+    ]);
+
+    await db.division.bulkCreate([
+      { name: 'A' },
+      { name: 'B' },
+      { name: 'C' },
+    ]);
+
+    console.log("Initial data added successfully.");
+  } catch (error) {
+    console.error("Error initializing data:", error.message);
+  }
+}
 
 // Ensure database exists and then start server
 createDatabase().then(() => {
   // Sync Sequelize models (create tables if they don't exist)
-  db.sequelize.sync().then(() => {
+  db.sequelize.sync({ alter: true }).then(() => {
     console.log("Database & tables ensured.");
-    initial(); // Insert default roles
+    initializeData(); // Initialize standards, subjects, and divisions
+    initialRoles(); // Insert default roles
   });
 
   // Start server
@@ -49,7 +102,7 @@ createDatabase().then(() => {
 });
 
 // Initial role setup
-function initial() {
+function initialRoles() {
   db.role
     .bulkCreate([
       { id: 1, name: "user" },

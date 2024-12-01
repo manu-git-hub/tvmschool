@@ -15,9 +15,16 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+
+// Import models
 db.user = require('./user.model')(sequelize, Sequelize);
 db.role = require('./role.model')(sequelize, Sequelize);
+db.standard = require('./teacherSchedule/standard.model')(sequelize, Sequelize);
+db.subject = require('./teacherSchedule/subject.model')(sequelize, Sequelize);
+db.division = require('./teacherSchedule/division.model')(sequelize, Sequelize);
+db.scheduleTeacher = require('./teacherSchedule/scheduleTeacher.model')(sequelize, Sequelize);
 
+// Define role-user many-to-many relationship
 db.role.belongsToMany(db.user, {
   through: 'user_roles',
   foreignKey: 'roleId',
@@ -29,5 +36,13 @@ db.user.belongsToMany(db.role, {
   otherKey: 'roleId',
 });
 
+// Define schedule relationships
+db.scheduleTeacher.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id' });
+db.scheduleTeacher.belongsTo(db.standard, { foreignKey: 'standardId' });
+db.scheduleTeacher.belongsTo(db.subject, { foreignKey: 'subjectId' });
+db.scheduleTeacher.belongsTo(db.division, { foreignKey: 'divisionId' });
+
+// Add constants
 db.ROLES = ['user', 'admin', 'moderator'];
+
 module.exports = db;
