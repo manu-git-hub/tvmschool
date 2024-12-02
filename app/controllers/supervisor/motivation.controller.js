@@ -11,23 +11,28 @@ exports.motivation = async (req, res) => {
       return res.status(400).send({ message: 'Teacher ID and an array of motivations are required.' });
     }
 
-    // Check if any motivation exceeds 250 characters
+    // Check if any motivation exceeds character limit
     const invalidTexts = motivations.filter((text) => text.length > 250);
     if (invalidTexts.length > 0) {
       return res.status(400).send({
-        message: 'Some motivation texts exceed 250 characters.',
+        message: 'Some motivations exceed 250 characters.',
         invalidTexts,
       });
     }
 
-    // Prepare bulk data
-    const motivationsData = motivations.map((text) => ({
+    // Get the next ID
+    const lastEntry = await Motivation.findOne({ order: [['id', 'DESC']] });
+    let nextId = lastEntry ? lastEntry.id + 1 : 1;
+
+    // Prepare data with custom IDs
+    const motivationData = motivations.map((text) => ({
+      id: nextId++,
       teacherId,
       motivationText: text,
     }));
 
     // Save all motivations
-    const newMotivations = await Motivation.bulkCreate(motivationsData);
+    const newMotivations = await Motivation.bulkCreate(motivationData);
 
     res.status(200).send({
       message: 'Motivations added successfully!',
