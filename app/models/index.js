@@ -37,6 +37,8 @@ db.activitiesHomework = require('./supervisor/activitiesHomework.model')(sequeli
 db.stem = require('./supervisor/stem.model')(sequelize, Sequelize);
 db.physicalActivity = require('./supervisor/physicalActivity.model')(sequelize, Sequelize);
 db.teacherPhysicalActivity = require('./supervisor/teacherPhysicalActivity.model')(sequelize, Sequelize);
+db.teachingAidVideo = require('./supervisor/teachingAidVideo.model')(sequelize, Sequelize);
+
 
 // Define role-user many-to-many relationship
 db.role.belongsToMany(db.user, {
@@ -68,6 +70,7 @@ db.activitiesHomework.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: '
 db.stem.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id' });
 db.teacherPhysicalActivity.belongsTo(db.physicalActivity, { foreignKey: 'activityId', targetKey: 'id' });
 db.teacherPhysicalActivity.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id' });
+db.teachingAidVideo.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id' });
 
 
 // Add constants
