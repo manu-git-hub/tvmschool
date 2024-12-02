@@ -31,7 +31,7 @@ const motivationRoutes = require('./app/routes/supervisor/motivation.routes');
 const teachingAidRoutes = require('./app/routes/supervisor/teachingAid.routes');
 const vocabularyRoutes = require('./app/routes/supervisor/vocabulary.routes');
 const generalKnowledgeRoutes = require('./app/routes/supervisor/generalKnowledge.routes');
-// const learningOutcomeRoutes = require('./app/routes/learningOutcome.routes');
+const learningOutcomeRoutes = require('./app/routes/supervisor/learningOutcome.routes');
 // const whyQuestionRoutes = require('./app/routes/whyQuestion.routes');
 // const activitiesHomeworkRoutes = require('./app/routes/activitiesHomework.routes');
 
@@ -44,7 +44,7 @@ app.use('/api/motivation', motivationRoutes);
 app.use('/api/teachingAid', teachingAidRoutes);
 app.use('/api/vocabulary', vocabularyRoutes);
 app.use('/api/generalKnowledge', generalKnowledgeRoutes);
-// app.use('/api/learningOutcome', learningOutcomeRoutes);
+app.use('/api/learningOutcome', learningOutcomeRoutes);
 // app.use('/api/whyQuestion', whyQuestionRoutes);
 // app.use('/api/activitiesHomework', activitiesHomeworkRoutes);
 
