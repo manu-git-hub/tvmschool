@@ -35,7 +35,7 @@ const learningOutcomeRoutes = require('./app/routes/supervisor/learningOutcome.r
 const whyQuestionRoutes = require('./app/routes/supervisor/whyQuestion.routes');
 const activitiesHomeworkRoutes = require('./app/routes/supervisor/activitiesHomework.routes');
 const learningOutcome2Routes = require('./app/routes/supervisor/learningOutcome2.routes');
-
+const stemRoutes = require('./app/routes/supervisor/stem.routes');
 
 
 app.use('/api/test', testRoutes);
@@ -50,6 +50,7 @@ app.use('/api/learningOutcome', learningOutcomeRoutes);
 app.use('/api/whyQuestion', whyQuestionRoutes);
 app.use('/api/learningOutcome2', learningOutcome2Routes);
 app.use('/api/activitiesHomework', activitiesHomeworkRoutes);
+app.use('/api/stem', stemRoutes);
 
 
 // Function to initialize data in the database
