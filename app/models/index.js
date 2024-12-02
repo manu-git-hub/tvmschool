@@ -15,6 +15,9 @@ const sequelize = new Sequelize(config.DB, config.USER, config.PASSWORD, {
 const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.sequelize.sync().then(() => {
+  db.physicalActivity.seed(); // Seed hardcoded physical activities
+});
 
 // Import models
 db.user = require('./user.model')(sequelize, Sequelize);
@@ -32,6 +35,8 @@ db.whyQuestion = require('./supervisor/whyQuestion.model')(sequelize,Sequelize)
 db.learningOutcome2 = require('./supervisor/learningOutcome2.model')(sequelize, Sequelize);
 db.activitiesHomework = require('./supervisor/activitiesHomework.model')(sequelize, Sequelize);
 db.stem = require('./supervisor/stem.model')(sequelize, Sequelize);
+db.physicalActivity = require('./supervisor/physicalActivity.model')(sequelize, Sequelize);
+db.teacherPhysicalActivity = require('./supervisor/teacherPhysicalActivity.model')(sequelize, Sequelize);
 
 // Define role-user many-to-many relationship
 db.role.belongsToMany(db.user, {
@@ -61,6 +66,9 @@ db.whyQuestion.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id'});
 db.learningOutcome2.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id'});
 db.activitiesHomework.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id'});
 db.stem.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id' });
+db.teacherPhysicalActivity.belongsTo(db.physicalActivity, { foreignKey: 'activityId', targetKey: 'id' });
+db.teacherPhysicalActivity.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id' });
+
 
 // Add constants
 db.ROLES = ['user', 'admin', 'moderator'];
