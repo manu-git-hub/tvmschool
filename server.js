@@ -38,6 +38,8 @@ const learningOutcome2Routes = require('./app/routes/supervisor/learningOutcome2
 const stemRoutes = require('./app/routes/supervisor/stem.routes');
 const physicalActivityRoutes = require('./app/routes/supervisor/physicalActivity.routes');
 const teachingAidVideoRoutes = require('./app/routes/supervisor/teachingAidVideo.routes');
+//Main --Routes
+const submitRoutes = require('./app/routes/main/submit.routes');
 
 app.use('/api/test', testRoutes);
 app.use('/app', userRoutes);
@@ -54,6 +56,7 @@ app.use('/api/activitiesHomework', activitiesHomeworkRoutes);
 app.use('/api/stem', stemRoutes);
 app.use('/api/physicalActivity', physicalActivityRoutes);
 app.use('/api/teachingAidVideo', teachingAidVideoRoutes);
+app.use('/api/submit', submitRoutes);
 
 
 // Function to initialize data in the database
