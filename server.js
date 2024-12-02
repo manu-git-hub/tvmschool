@@ -33,7 +33,7 @@ const vocabularyRoutes = require('./app/routes/supervisor/vocabulary.routes');
 const generalKnowledgeRoutes = require('./app/routes/supervisor/generalKnowledge.routes');
 const learningOutcomeRoutes = require('./app/routes/supervisor/learningOutcome.routes');
 const whyQuestionRoutes = require('./app/routes/supervisor/whyQuestion.routes');
-// const activitiesHomeworkRoutes = require('./app/routes/activitiesHomework.routes');
+const activitiesHomeworkRoutes = require('./app/routes/supervisor/activitiesHomework.routes');
 const learningOutcome2Routes = require('./app/routes/supervisor/learningOutcome2.routes');
 
 
@@ -49,7 +49,7 @@ app.use('/api/generalKnowledge', generalKnowledgeRoutes);
 app.use('/api/learningOutcome', learningOutcomeRoutes);
 app.use('/api/whyQuestion', whyQuestionRoutes);
 app.use('/api/learningOutcome2', learningOutcome2Routes);
-// app.use('/api/activitiesHomework', activitiesHomeworkRoutes);
+app.use('/api/activitiesHomework', activitiesHomeworkRoutes);
 
 
 // Function to initialize data in the database

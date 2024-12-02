@@ -30,7 +30,7 @@ db.generalKnowledge = require('./supervisor/generalKnowledge.model')(sequelize,S
 db.learningOutcome = require('./supervisor/learningOutcome.model')(sequelize,Sequelize)
 db.whyQuestion = require('./supervisor/whyQuestion.model')(sequelize,Sequelize)
 db.learningOutcome2 = require('./supervisor/learningOutcome2.model')(sequelize, Sequelize);
-
+db.activitiesHomework = require('./supervisor/activitiesHomework.model')(sequelize, Sequelize);
 
 // Define role-user many-to-many relationship
 db.role.belongsToMany(db.user, {
@@ -58,6 +58,7 @@ db.generalKnowledge.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id
 db.learningOutcome.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id'});
 db.whyQuestion.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id'});
 db.learningOutcome2.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id'});
+db.activitiesHomework.belongsTo(db.user, { foreignKey: 'teacherId', targetKey: 'id'});
 
 // Add constants
 db.ROLES = ['user', 'admin', 'moderator'];
