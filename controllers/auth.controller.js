@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const nodemailer = require('nodemailer');
 const mailConfig = require('../config/mail.config');
 const Role = db.role;
-const { AppError } = require('../middleware/errorHandler');
+const { blacklistToken } = require('../utils/tokenBlacklist');
 
 
 exports.signup = async (req, res) => {
@@ -33,7 +33,7 @@ exports.signup = async (req, res) => {
     // Create user with the manually assigned ID
     const user = await db.user.create({
       id: nextId, // Assign the sequential ID
-      userID: String(nextId).padStart(4, '0'), // Generate userID with leading zeros
+      userID: String(nextId).padStart(4, '0'), 
       username,
       email,
       password: hashedPassword,
@@ -77,6 +77,13 @@ exports.signup = async (req, res) => {
 exports.signin = async (req, res) => {
   try {
     const { identifier, password } = req.body; // identifier can be userID or email
+
+    // Validate required fields
+    if (!identifier || !password) {
+      return res.status(400).send({
+        message: 'Invalid input. Please provide both identifier and password.',
+      });
+    }
 
     let user;
 
@@ -122,24 +129,20 @@ exports.signin = async (req, res) => {
 
 
 
-exports.logout = async (req, res) => {
+exports.logout = (req, res) => {
   try {
     const token = req.headers['authorization']?.split(' ')[1];
     if (!token) {
       return res.status(400).send({ message: 'Token is required for logout.' });
     }
 
-    // Decode the token to get its expiration time
+    // Decode the token to get the expiration time
     const decoded = jwt.decode(token);
-    const expiresAt = new Date(decoded.exp * 1000); // Convert UNIX timestamp to JavaScript Date
+    const expiresIn = decoded.exp - Math.floor(Date.now() / 1000); // Time left in seconds
 
-    // Store the token in the blacklist
-    await db.token_blacklist.create({
-      token: token,
-      expires_at: expiresAt,
-    });
+    // Blacklist the token
+    blacklistToken(token, expiresIn);
 
-    req.session = null; // Clear the session (if any)
     res.status(200).send({ message: 'User logged out successfully!' });
   } catch (error) {
     console.error('Logout Error:', error.message);

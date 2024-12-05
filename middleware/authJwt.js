@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken'); // Ensure this is imported
 const db = require('../models');
+const { isTokenBlacklisted } = require('../utils/tokenBlacklist');
 const User = db.user;
 
 const verifyToken = async (req, res, next) => {
@@ -8,9 +9,8 @@ const verifyToken = async (req, res, next) => {
     return res.status(403).send({ message: 'No token provided!' });
   }
 
-  // Check if the token is in the blacklist
-  const blacklistedToken = await db.token_blacklist.findOne({ where: { token } });
-  if (blacklistedToken) {
+  // Check if the token is blacklisted
+  if (isTokenBlacklisted(token)) {
     return res.status(401).send({ message: 'Token has been invalidated!' });
   }
 

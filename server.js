@@ -6,8 +6,7 @@ const dotenv = require('dotenv');
 const db = require('./models');
 const createDatabase = require('./createDatabase');
 const initializeRoles = require('./utils/roleInitializer');
-const { errorHandler } = require('./middleware/errorHandler');
-
+const errorHandler = require('./middleware/errorHandler');
 dotenv.config();
 
 const app = express();
@@ -50,4 +49,4 @@ createDatabase()
   .catch((err) => console.error('Error initializing the server:', err.message));
 
   // Error handling middleware (must be last)
-app.use(errorHandler);
+  app.use(errorHandler);

@@ -7,7 +7,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     userID: {
       type: Sequelize.STRING,
-      unique: true, // Ensure userID is unique
+      unique: true,
       allowNull: false,
     },
     username: {
@@ -19,6 +19,10 @@ module.exports = (sequelize, Sequelize) => {
     },
     password: {
       type: Sequelize.STRING,
+    },
+    status: {
+      type: Sequelize.ENUM('active', 'suspended', 'deactivated'),
+      defaultValue: 'active', // Default status for new users
     },
   });
 };

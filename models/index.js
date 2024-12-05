@@ -17,9 +17,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 db.user = require('./user.model')(sequelize, Sequelize);
 db.role = require('./role.model')(sequelize, Sequelize);
-const TokenBlacklist = require('./tokenBlacklist.model')(sequelize, Sequelize);
 
-db.token_blacklist = TokenBlacklist;
 db.role.belongsToMany(db.user, {
   through: 'user_roles',
   foreignKey: 'roleId',
