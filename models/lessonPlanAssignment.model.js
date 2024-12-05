@@ -6,11 +6,11 @@ module.exports = (sequelize, Sequelize) => {
         primaryKey: true,
       },
       faculty_id: {
-        type: Sequelize.STRING, // Use STRING if `faculty_id` is stored like '0002'
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      subject_name: {
-        type: Sequelize.JSON,
+      academic_year: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       grade: {
@@ -21,8 +21,8 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.JSON,
         allowNull: false,
       },
-      lp_cycle_number: {
-        type: Sequelize.INTEGER,
+      subject_name: {
+        type: Sequelize.JSON,
         allowNull: false,
       },
       unit_number: {
@@ -41,11 +41,15 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      date_of_submission: {
-        type: Sequelize.DATE,
+      lp_cycle_number: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       lp_due_date: {
+        type: Sequelize.DATE,
+        allowNull: false,
+      },
+      date_of_submission: {
         type: Sequelize.DATE,
         allowNull: true,
       },
@@ -54,9 +58,26 @@ module.exports = (sequelize, Sequelize) => {
         allowNull: true,
       },
       status: {
-        type: Sequelize.ENUM('pending', 'reviewed', 'completed'),
-        defaultValue: 'pending', 
+        type: Sequelize.ENUM('pending', 'submitted', 'draft', 'approved',  'resubmitted'),
+        defaultValue: 'pending',
       },
+
+    /**
+     * For future --------------------
+     */
+
+    //   compliance_status : {
+    //     type: Sequelize.ENUM('draft', 'before time', 'on time', 'draft', 'overdue',  'resubmitted'),
+    //     defaultValue: 'draft',
+    //   },
+    //   faculty_remarks: {
+    //     type: Sequelize.STRING,
+    //     allowNull: true,
+    //   },
+    //   approve_remarks: {
+    //     type: Sequelize.STRING,
+    //     allowNull: true,
+    //   },
     });
   };
   
