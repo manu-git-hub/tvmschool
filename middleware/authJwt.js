@@ -60,4 +60,31 @@ const isSupervisor = async (req, res, next) => {
   res.status(403).send({ message: 'Require Supervisor Role!' });
 };
 
-module.exports = { verifyToken, isAdmin, isFaculty, isSupervisor };
+const isAdminOrSupervisor = async (req, res, next) => {
+  try {
+    // Check if userId is set in the request
+    if (!req.userId) {
+      return res.status(403).send({ message: 'User ID not found in request!' });
+    }
+
+    // Find user by primary key
+    const user = await db.user.findByPk(req.userId);
+    if (!user) {
+      return res.status(404).send({ message: 'User not found!' });
+    }
+
+    // Get roles for the user
+    const roles = await user.getRoles();
+    if (roles.some((role) => ['admin', 'supervisor'].includes(role.name))) {
+      return next();
+    }
+
+    res.status(403).send({ message: 'Require Admin or Supervisor Role!' });
+  } catch (error) {
+    console.error('Error in isAdminOrSupervisor middleware:', error.message);
+    res.status(500).send({ message: 'Internal server error.' });
+  }
+};
+
+
+module.exports = { verifyToken, isAdmin, isFaculty, isSupervisor , isAdminOrSupervisor};

@@ -28,10 +28,12 @@ app.use(
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const testRoutes = require('./routes/test.routes');
+const lessonPlanRoutes = require('./routes/lessonPlan.routes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/test', testRoutes);
+app.use('/api/lesson-plans', lessonPlanRoutes);
 
 // Start server
 createDatabase()
