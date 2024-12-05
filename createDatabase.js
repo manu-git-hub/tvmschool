@@ -1,5 +1,5 @@
-const mysql = require("mysql2/promise");
-require("dotenv").config(); 
+const mysql = require('mysql2/promise');
+require('dotenv').config();
 
 const createDatabase = async () => {
   try {
@@ -9,13 +9,12 @@ const createDatabase = async () => {
       password: process.env.DB_PASSWORD,
     });
 
-    // Create the database if it doesn't exist
     await connection.query(`CREATE DATABASE IF NOT EXISTS \`${process.env.DB_NAME}\`;`);
     console.log(`Database "${process.env.DB_NAME}" ensured.`);
     await connection.end();
   } catch (err) {
-    console.error("Error creating database:", err.message);
-    process.exit(1); 
+    console.error('Error creating database:', err.message);
+    process.exit(1);
   }
 };
 
