@@ -4,7 +4,7 @@ const physicalActivityController = require('../../controllers/components/physica
 const router = express.Router();
 
 // Faculty-only routes
-router.post('/', [authJwt.verifyToken, authJwt.isFaculty], physicalActivityController.addPhysicalActivities);
+router.post('/add', [authJwt.verifyToken, authJwt.isFaculty], physicalActivityController.addPhysicalActivities);
 router.put('/', [authJwt.verifyToken, authJwt.isFaculty], physicalActivityController.editPhysicalActivities);
 router.delete('/', [authJwt.verifyToken, authJwt.isFaculty], physicalActivityController.deletePhysicalActivities);
 
