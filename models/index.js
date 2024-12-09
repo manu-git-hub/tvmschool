@@ -19,6 +19,7 @@ db.user = require('./user.model')(sequelize, Sequelize);
 db.role = require('./role.model')(sequelize, Sequelize);
 db.lesson_plan_assignment = require('./lessonPlanAssignment.model')(sequelize, Sequelize);
 db.physical_activities = require('./components/physicalActivity.model')(sequelize, Sequelize);
+db.motivations = require('./components/motivation.model')(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: 'user_roles',

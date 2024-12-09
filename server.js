@@ -32,7 +32,7 @@ const lessonPlanRoutes = require('./routes/lessonPlan.routes');
 
 // Import component-specific routes
 const physicalActivityRoutes = require('./routes/components/physicalActivity.routes');
-// const motivationRoutes = require('./routes/components/motivation.routes');
+const motivationRoutes = require('./routes/components/motivation.routes');
 // const teachingAidOthersRoutes = require('./routes/components/teachingAidOthers.routes');
 // const stemRoutes = require('./routes/components/stem.routes');
 // const vocabularyRoutes = require('./routes/components/vocabulary.routes');
@@ -48,7 +48,7 @@ app.use('/api/test', testRoutes);
 app.use('/api/lesson-plans', lessonPlanRoutes);
 // Map each route to its respective component
 app.use('/api/physical-activities', physicalActivityRoutes);
-// app.use('/api/motivations', motivationRoutes);
+app.use('/api/motivations', motivationRoutes);
 // app.use('/api/teaching-aid-others', teachingAidOthersRoutes);
 // app.use('/api/stem', stemRoutes);
 // app.use('/api/vocabulary', vocabularyRoutes);
