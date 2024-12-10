@@ -24,6 +24,7 @@ db.teaching_aid_others = require('./components/teachingAidOthers.model')(sequeli
 db.stem = require('./components/stem.model')(sequelize, Sequelize);
 db.vocabulary = require('./components/vocabulary.model')(sequelize, Sequelize);
 db.five_w_questions = require('./components/fiveWQuestions.model')(sequelize, Sequelize);
+db.general_knowledge = require('./components/generalKnowledge.model')(sequelize, Sequelize);
 
 db.role.belongsToMany(db.user, {
   through: 'user_roles',
