@@ -40,7 +40,7 @@ const fiveWQuestionsRoutes = require('./routes/components/fiveWQuestions.routes'
 const generalKnowledgeRoutes = require('./routes/components/generalKnowledge.routes');
 const learningOutcomeRoutes = require('./routes/components/learningOutcome.routes');
 const activitiesHomeworkRoutes = require('./routes/components/activitiesHomework.routes');
-// const evaluationRoutes = require('./routes/components/evaluation.routes');
+const evaluationRoutes = require('./routes/components/evaluation.routes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
@@ -57,7 +57,7 @@ app.use('/api/five-w-questions', fiveWQuestionsRoutes);
 app.use('/api/general-knowledge', generalKnowledgeRoutes);
 app.use('/api/learning-outcomes', learningOutcomeRoutes);
 app.use('/api/activities-homework', activitiesHomeworkRoutes);
-// app.use('/api/evaluation', evaluationRoutes);
+app.use('/api/evaluation', evaluationRoutes);
 
 // Start server
 createDatabase()
