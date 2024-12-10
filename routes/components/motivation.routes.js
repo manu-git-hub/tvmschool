@@ -4,7 +4,7 @@ const motivationsController = require('../../controllers/components/motivation.c
 const router = express.Router();
 
 // Faculty-only routes
-router.post('/', [authJwt.verifyToken, authJwt.isFaculty], motivationsController.addMotivations);
+router.post('/add', [authJwt.verifyToken, authJwt.isFaculty], motivationsController.addMotivations);
 router.put('/', [authJwt.verifyToken, authJwt.isFaculty], motivationsController.editMotivations);
 router.delete('/', [authJwt.verifyToken, authJwt.isFaculty], motivationsController.deleteMotivations);
 
