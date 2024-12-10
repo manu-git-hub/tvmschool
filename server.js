@@ -35,7 +35,7 @@ const physicalActivityRoutes = require('./routes/components/physicalActivity.rou
 const motivationRoutes = require('./routes/components/motivation.routes');
 const teachingAidOthersRoutes = require('./routes/components/teachingAidOthers.routes');
 const stemRoutes = require('./routes/components/stem.routes');
-// const vocabularyRoutes = require('./routes/components/vocabulary.routes');
+const vocabularyRoutes = require('./routes/components/vocabulary.routes');
 // const fiveWQuestionsRoutes = require('./routes/components/fiveWQuestions.routes');
 // const generalKnowledgeRoutes = require('./routes/components/generalKnowledge.routes');
 // const learningOutcomeRoutes = require('./routes/components/learningOutcome.routes');
@@ -52,7 +52,7 @@ app.use('/api/physical-activities', physicalActivityRoutes);
 app.use('/api/motivations', motivationRoutes);
 app.use('/api/teaching-aid-others', teachingAidOthersRoutes);
 app.use('/api/stem', stemRoutes);
-// app.use('/api/vocabulary', vocabularyRoutes);
+app.use('/api/vocabulary', vocabularyRoutes);
 // app.use('/api/five-w-questions', fiveWQuestionsRoutes);
 // app.use('/api/general-knowledge', generalKnowledgeRoutes);
 // app.use('/api/learning-outcomes', learningOutcomeRoutes);
