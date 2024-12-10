@@ -26,6 +26,7 @@ db.vocabulary = require('./components/vocabulary.model')(sequelize, Sequelize);
 db.five_w_questions = require('./components/fiveWQuestions.model')(sequelize, Sequelize);
 db.general_knowledge = require('./components/generalKnowledge.model')(sequelize, Sequelize);
 db.learning_outcomes = require('./components/learningOutcome.model')(sequelize, Sequelize);
+db.activities_homework = require('./components/activitiesHomework.model')(sequelize, Sequelize);
 
 
 db.role.belongsToMany(db.user, {
